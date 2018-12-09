@@ -1,0 +1,72 @@
+{
+  "name": "luminave-thorium",
+  "version": "0.0.1",
+  "description": "Create a connection between luminave and Thorium.",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.node.config.js",
+    "start": "npm-run-all --parallel watch:server watch:build",
+    "watch:build": "webpack --config webpack.node.config.js --watch",
+    "watch:server": "nodemon --inspect=\"9228\" \"./build/bundle.js\" --watch \"./build\" ",
+    "test": "jest",
+    "clean": "rimraf umd docs/*.js docs/*.map",
+    "jsdoc": "jsdoc2md --heading-depth 2 --partial .github/scope.hbs --template .github/API_template.md --files example.js > docs/API.md",
+    "toc": "markdown-toc -i README.md",
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NERDDISCO/luminave-thorium.git"
+  },
+  "keywords": [
+    "luminave",
+    "Thorium",
+    "DMX512",
+    "GraphQL",
+    "space",
+    "simulator"
+  ],
+  "author": "Tim Pietrusky",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NERDDISCO/luminave-thorium/issues"
+  },
+  "homepage": "https://github.com/NERDDISCO/luminave-thorium#readme",
+  "files": [
+    "index.js",
+    "README.md",
+    "docs/CHANGELOG.md",
+    "docs/API.md"
+  ],
+  "dependencies": {
+    "apollo-link-batch-http": "^1.2.4",
+    "bonjour": "^3.5.0",
+    "graphqurl": "^0.3.2"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^2.0.2",
+    "@semantic-release/git": "^4.0.3",
+    "babel-jest": "^22.4.3",
+    "cross-env": "^5.1.4",
+    "eslint": "^4.19.1",
+    "jest": "^22.4.3",
+    "jsdoc-to-markdown": "^4.0.1",
+    "markdown-toc": "^1.2.0",
+    "rimraf": "^2.6.2",
+    "semantic-release": "^15.1.7",
+    "travis-deploy-once": "^5.0.0",
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "babel-loader": "^8.0.4",
+    "babel-preset-latest-node": "^2.0.0-beta.3",
+    "nodemon": "^1.18.7",
+    "npm-run-all": "^4.1.5",
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-node-externals": "^1.7.2"
+  }
+}
