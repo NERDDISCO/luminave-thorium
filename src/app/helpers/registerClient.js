@@ -1,10 +1,12 @@
 import getClient from './graphqlClient';
-const availableCards = ["Test Screen"];
+const availableCards = ['Test Screen'];
 
 export default function() {
   const client = getClient();
+
   function deregister() {
-    console.log("Shutting down server...");
+    console.log('Shutting down client...');
+
     client
       .query({
         query: `
@@ -15,12 +17,14 @@ export default function() {
         variables: { id: client.clientId }
       })
       .then(() => {
-        console.log("Client unregistered.");
+        console.log('Client unregistered.');
         process.exit();
         return 0;
       });
   }
-  process.on("SIGINT", deregister);
+
+  process.on('SIGINT', deregister);
+
   return client
     .query({
       query: `

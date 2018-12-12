@@ -1,4 +1,4 @@
-import getClient from '../helpers/graphqlClient';
+import getClient from './helpers/graphqlClient';
 import { clientId } from '../index';
 import gql from 'graphql-tag';
 import { App } from './index';
