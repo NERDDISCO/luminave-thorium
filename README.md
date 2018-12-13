@@ -8,13 +8,11 @@ Create a connection between [luminave](https://github.com/NERDDISCO/luminave) an
 
 <!-- toc -->
 
-- [luminave-thorium](#luminave-thorium)
-  - [Table of Contents](#table-of-contents)
-  - [Setup](#setup)
-  - [Testing](#testing)
-    - [GraphQL](#graphql)
-  - [API Documentation](#api-documentation)
-  - [Data provided by Thorium](#data-provided-by-thorium)
+- [Setup](#setup)
+- [Testing](#testing)
+  * [GraphQL](#graphql)
+- [API Documentation](#api-documentation)
+- [Data provided by Thorium](#data-provided-by-thorium)
 
 <!-- tocstop -->
 
