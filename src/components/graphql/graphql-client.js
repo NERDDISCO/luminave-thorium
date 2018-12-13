@@ -3,13 +3,13 @@ import { query } from 'graphqurl'
 /**
  * The client can be used to interact with the GraphQL API of Thorium.
  * 
- * @module GraphQLClient
+ * @module GraphqlClient
  * 
  * @param {string} address - The IP of the Thorium server
  * @param {string} port - The port of the Thorium server
  * @param {string} clientId - The ID of the client that will be used in Thorium to identify this client
  */
-export class GraphQLClient {
+export class GraphqlClient {
   constructor(address, port, clientId) {
     // Query / Mutation endpoint over HTTP
     this.endpoint = `http://${address}:${parseInt(port, 10) + 1}/graphql`
@@ -23,9 +23,9 @@ export class GraphQLClient {
   /**
    * Execute a query.
    * 
-   * @param {*} queryParams 
+   * @param {Object} queryParams - Parameter for the query
    * 
-   * @return {Promise}
+   * @return {Promise} -
    */
   query(queryParams) {
     return query({
@@ -41,9 +41,9 @@ export class GraphQLClient {
   /**
    * Create a subscription.
    * 
-   * @param {*} queryParams 
+   * @param {Object} queryParams - Parameter for the query
    * 
-   * @return {Promise}
+   * @return {Promise} -
    */
   subscribe(queryParams) {
     return query({
@@ -62,11 +62,18 @@ let client = null
 /**
  * Singleton client
  * 
- * @see GraphQLClient
+ * @param {string} address - The IP of the Thorium server
+ * @param {string} port - The port of the Thorium server
+ * @param {string} clientId - The ID of the client that will be used in Thorium to identify this client
+ * 
+ * @return {Object} client - The instance of the GraphqlClient
  */
 export default function getClient(address, port, clientId) {
-  if (client) return client
+  if (client) {
+    return client
+  }
 
-  client = new GraphQLClient(address, port, clientId)
+  client = new GraphqlClient(address, port, clientId)
+
   return client
 }

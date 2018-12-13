@@ -1,18 +1,15 @@
-import getThoriumAddress from './app/helpers/bonjour'
-import startApp from './app'
+import getThoriumAddress from './components/bonjour/bonjour'
+import startApp from './components/app/app'
+import { thoriumClientId } from './constants/index'
 
-// Override this with the specific name of the client you want to run.
-let clientId = "ECS"
-export { clientId }
-
-console.log("Activating bonjour to find the Thorium Server...")
+console.log('Activating bonjour to find the Thorium Server...')
 
 getThoriumAddress()
-  .then(({ address, port, name }) => {
+  .then(({ address, port }) => {
     console.log(`Found Thorium server: ${address}:${port}`)
-    startApp(address, port, clientId)
+    startApp(address, port, thoriumClientId)
   })
   .catch(err => {
-    console.error("An error occured")
+    console.error('An error occured')
     console.error(err)
   })
