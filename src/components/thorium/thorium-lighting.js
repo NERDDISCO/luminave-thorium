@@ -32,6 +32,8 @@ const SUBSCRIPTION = gql`
 /**
  * Get the lighting information out of Thorium for a specific simulator
  * 
+ * @module ThoriumLighting
+ * 
  * @param {Object} args - The arguments to configure ThoriumLighting
  * @param {String} args.simulatorId - The ID of the simulator that has the lighting information
  */
