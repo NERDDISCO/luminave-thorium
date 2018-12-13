@@ -6,11 +6,12 @@ Create a connection between [luminave](https://github.com/NERDDISCO/luminave) an
 <!-- toc -->
 
 - [luminave-thorium](#luminave-thorium)
-    - [Table of Contents](#table-of-contents)
-    - [Setup](#setup)
-    - [Testing](#testing)
-        - [GraphQL](#graphql)
-        - [API Documentation](#api-documentation)
+  - [Table of Contents](#table-of-contents)
+  - [Setup](#setup)
+  - [Testing](#testing)
+    - [GraphQL](#graphql)
+  - [API Documentation](#api-documentation)
+  - [Data provided by Thorium](#data-provided-by-thorium)
 
 <!-- tocstop -->
 
@@ -42,6 +43,27 @@ You can also open a web-client with http://192.168.178.20:3000/client
 
 ---
 
-### API Documentation
+## API Documentation
 
 Can be found on [API documentation](docs/API.md).
+
+--- 
+
+## Data provided by Thorium
+
+[Detailed explanation on how this data could be interpreted.](https://github.com/Thorium-Sim/thorium/issues/1645#issuecomment-445867388)
+
+```graphql
+query Simulators($simulatorId: String) {
+  simulators(id: $simulatorId) {
+    id
+    lighting {
+      intensity # [0 - 1] How bright the lights should be
+      action # One of 'normal', 'fade', 'shake', 'strobe', 'oscillate'
+      actionStrength # [0 - 1] How intense the action is. How quickly it shakes, or how fast it strobes or oscillates
+      transitionDuration # How long a 'fade' action should last in milliseconds
+      color # A suggested color for the lights
+    }
+  }
+}
+```
