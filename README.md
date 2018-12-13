@@ -1,5 +1,8 @@
 # luminave-thorium
+
 Create a connection between [luminave](https://github.com/NERDDISCO/luminave) and the [Thorium Simulator](https://thoriumsim.com/) using GraphQL.
+
+[![Build Status](https://travis-ci.org/NERDDISCO/luminave-thorium.svg?branch=master)](https://travis-ci.org/NERDDISCO/luminave-thorium)
 
 ## Table of Contents
 
@@ -33,7 +36,7 @@ Create a connection between [luminave](https://github.com/NERDDISCO/luminave) an
 * In the Thorium interface: Go to Core
 
 
-You can also open a web-client with http://192.168.178.20:3000/client
+You can also open a web-client with http://localhost:3000/client
 
 
 ### GraphQL
