@@ -12,6 +12,7 @@ Create a connection between [luminave](https://github.com/NERDDISCO/luminave) an
   - [Table of Contents](#table-of-contents)
   - [Setup](#setup)
   - [Testing](#testing)
+    - [Workflow](#workflow)
     - [GraphQL](#graphql)
   - [API Documentation](#api-documentation)
   - [Data provided by Thorium](#data-provided-by-thorium)
@@ -37,6 +38,13 @@ Create a connection between [luminave](https://github.com/NERDDISCO/luminave) an
 
 
 You can also open a web-client with http://localhost:3000/client
+
+### Workflow
+
+* The app tries to find the Thorium Server running in the local network
+* When it finds it it tries to setup a connection to it and registers itself as a client called "ECS"
+* When this was successful, it subscribes to new messages on the simulator and the lighting changes (thorium-lighting)
+* Those updates are send via a mutation to the luminave-server
 
 
 ### GraphQL
