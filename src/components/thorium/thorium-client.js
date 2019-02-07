@@ -1,4 +1,4 @@
-import getClient from '../graphql/graphql-client'
+import { getClient, getError, TYPE_THORIUM } from '../graphql/graphql-client'
 import { App } from '../app/app'
 import gql from 'graphql-tag'
 
@@ -42,7 +42,8 @@ export default class ThoriumClient {
     // Set up a query to get the data that we need
     // We can grab the client without parameters, since
     // the client has already been created by this point
-    const graphQLClient = getClient()
+    
+    const graphQLClient = getClient(TYPE_THORIUM)
 
     graphQLClient
       .query({ 
@@ -80,7 +81,7 @@ export default class ThoriumClient {
               }
             )
           })
-          .catch(err => console.error(err))
+          .catch(error => console.error(getError(error)))
       })
   }
 }

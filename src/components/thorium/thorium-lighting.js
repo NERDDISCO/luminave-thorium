@@ -1,4 +1,4 @@
-import getClient from '../graphql/graphql-client'
+import { getClient, getError, TYPE_THORIUM } from '../graphql/graphql-client'
 import gql from 'graphql-tag'
 import { App } from '../app/app'
 
@@ -42,7 +42,7 @@ export default class ThoriumLighting {
 
     this.simulatorId = args.simulatorId
 
-    const graphQLClient = getClient()
+    const graphQLClient = getClient(TYPE_THORIUM)
 
     graphQLClient
       .query({ 
@@ -71,7 +71,7 @@ export default class ThoriumLighting {
               }
             )
           })
-          .catch(err => console.error(err))
+          .catch(error => console.error(getError(error)))
       })
   }
 }

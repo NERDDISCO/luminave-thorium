@@ -1,11 +1,11 @@
-import getClient from '../graphql/graphql-client'
+import { getClient, TYPE_THORIUM } from '../graphql/graphql-client'
 import { thoriumAvailableCards } from '../../constants/index'
 
 /**
  * @return {*} - What gets returned here?
  */
 export default function() {
-  const client = getClient()
+  const client = getClient(TYPE_THORIUM)
 
   const deregister = () => {
     console.log('Shutting down client...')

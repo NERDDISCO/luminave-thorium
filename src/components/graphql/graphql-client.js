@@ -1,5 +1,13 @@
 import { query } from 'graphqurl'
 
+export const TYPE_THORIUM = 'thorium-client'
+export const TYPE_LUMINAVE = 'luminave-client'
+
+const clients = {
+  TYPE_THORIUM: null,
+  TYPE_LUMINAVE: null
+}
+
 /**
  * The client can be used to interact with the GraphQL API of Thorium.
  * 
@@ -13,6 +21,8 @@ export class GraphqlClient {
   constructor(address, port, clientId) {
     // Query / Mutation endpoint over HTTP
     this.endpoint = `http://${address}:${parseInt(port, 10) + 1}/graphql`
+
+    console.log(this.endpoint)
 
     // Subscription endpoint over WebSockets
     this.subscriptionEndpoint = `ws://${address}:${parseInt(port, 10) + 2}/subscriptions`
@@ -57,23 +67,38 @@ export class GraphqlClient {
   }
 }
 
-let client = null
-
 /**
  * Singleton client
  * 
+ * @param {string} type - What kind of GraphQL client (either thorium or luminave)
  * @param {string} address - The IP of the Thorium server
  * @param {string} port - The port of the Thorium server
  * @param {string} clientId - The ID of the client that will be used in Thorium to identify this client
  * 
  * @return {Object} client - The instance of the GraphqlClient
  */
-export default function getClient(address, port, clientId) {
-  if (client) {
-    return client
+export const getClient = (type, address, port, clientId) => {
+  if (clients[type]) {
+    return clients[type]
   }
 
-  client = new GraphqlClient(address, port, clientId)
+  clients[type] = new GraphqlClient(address, port, clientId)
 
-  return client
+  return clients[type]
+}
+
+/**
+ * Based on the error gives back only network errors
+ * 
+ * @param {*} error The GraphQL error
+ * 
+ * @returns {*} error
+ */
+export const getError = error => {
+  // If there is a network error we return it
+  if (error.networkError !== undefined) {
+    return error.networkError.result.errors
+  } 
+
+  return error
 }
