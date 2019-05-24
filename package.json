@@ -10,7 +10,7 @@
     "build": "webpack --config webpack.node.config.js",
     "start": "npm-run-all --parallel watch:server watch:build",
     "watch:build": "webpack --config webpack.node.config.js --watch",
-    "watch:server": "nodemon --inspect=\"9228\" \"./build/bundle.js\" --watch \"./build\" ",
+    "watch:server": "nodemon \"./build/bundle.js\" --watch \"./build\" ",
     "test": "jest",
     "clean": "rimraf umd docs/*.js docs/*.map",
     "jsdoc": "jsdoc2md --heading-depth 2 --partial .github/scope.hbs --template .github/API_template.md --files src/components/**/*.js src/constants/*.js > docs/API.md",
@@ -45,6 +45,8 @@
   "dependencies": {
     "apollo-link-batch-http": "^1.2.4",
     "bonjour": "^3.5.0",
+    "color": "^3.1.1",
+    "dotenv": "^8.0.0",
     "graphqurl": "^0.3.2"
   },
   "devDependencies": {
