@@ -1,5 +1,7 @@
 import { getClient, getError, TYPE_LUMINAVE } from '../graphql/graphql-client'
 import gql from 'graphql-tag'
+import { toFixedNumber } from '../../utils/utils.js'
+import Color from 'color'
 
 const QUERY = gql`
   query scenes {
@@ -9,10 +11,23 @@ const QUERY = gql`
   }
 `
 
-const MUTATION = gql`
+const MUTATION_SET_TIMELINE_SCENES = gql`
   mutation setScenes($scenes: [SceneInput]) {
     setTimelineScenes(scenes: $scenes) {
       name
+    }
+  }
+`
+
+const MUTATION_SET_ANIMATION = gql`
+  mutation setAnimation($animation: AnimationInput) {
+    setAnimation(animation: $animation) {
+      dimmer
+      duration 
+      color
+      action
+      actionStrength
+      externalId
     }
   }
 `
@@ -35,7 +50,6 @@ export default class LuminaveClient {
 
       // Extract the scenes from the result
       .then(({ data: { getTimelineScenes: scenes } }) => {
-        console.log(scenes)
         this.timelineScenes = scenes
       })
 
@@ -52,16 +66,40 @@ export default class LuminaveClient {
   updateTimeline(scenes) {
     this.graphqlClient
       .query({ 
-        query: MUTATION,
+        query: MUTATION_SET_TIMELINE_SCENES,
         variables: { scenes }
       })
 
       // Extract the scenes from the result
       .then(({ data }) => {
-        console.log(data)
+        console.log('updateTimeline was successful with:', data)
       })
 
       .catch(error => console.error(getError(error)))
+  }
+
+  /**
+   * Update animation data
+   * 
+   * @param {Object[]} animation - The animation data from other applications, for example Thorium
+   * 
+   * @return {undefined}
+   */
+  setAnimation(animation) {
+    this.graphqlClient
+      .query({ 
+        query: MUTATION_SET_ANIMATION,
+        variables: { animation }
+      })
+
+      // Extract the scenes from the result
+      .then(({ data }) => {
+        console.log('setAnimation was successful with:', data)
+      })
+
+      .catch(error => {
+        console.error(getError(error))
+      })
   }
 
   /**
@@ -73,25 +111,43 @@ export default class LuminaveClient {
    * @returns {Object[]} A list of scenes
    */
   transformLightingToScenes(lighting) {
-    const { intensity, action } = lighting
     let { color } = lighting
     const scenes = []
-
-    // Intensity
-    if (intensity === 0) {
-      scenes.push(this.createScene('intensity-0'))
-    } else {
-      scenes.push(this.createScene('intensity-1'))
-    }
 
     // Color
     if (color === '#08f') {
       color = 'normal'
     }
-
     scenes.push(this.createScene(`color-${color}`))
 
     return scenes
+  }
+
+  /**
+   * 
+   * Transform the Lighting from Thorium into animation for luminave
+   * 
+   * @param {Object} lighting - The lighting data from Thorium 
+   * 
+   * @returns {Object} - An animation
+   */
+  transformLightingToAnimation(lighting) {
+    const { intensity, transitionDuration, color, action, actionStrength } = lighting
+
+    // ID that will be used in luminave to identify the animation that will be used to 
+    // dynamically update it's keyframes
+    const externalId = 'luminave-thorium-dynamic-animation-1337'
+
+    const animation = {
+      dimmer: Math.round(255 * intensity),
+      duration: toFixedNumber(transitionDuration, 1),
+      color: Color(color).rgb().array(),
+      action,
+      actionStrength,
+      externalId
+    }
+
+    return animation
   }
 
   /**

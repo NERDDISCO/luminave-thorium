@@ -44,6 +44,8 @@ export default class ThoriumLighting {
 
     const graphQLClient = getClient(TYPE_THORIUM)
 
+    console.log('ThoriumLighting', args.simulatorId)
+
     graphQLClient
       .query({ 
         query: QUERY, 

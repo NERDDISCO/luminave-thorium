@@ -10,10 +10,12 @@ export default (address, port, thoriumClientId) => {
   console.log('Starting app...')
 
   // Create the client singleton for Thorium
-  getClient(TYPE_THORIUM, address, port, thoriumClientId)
+  // @TODO: host & port should be configurable, see https://github.com/NERDDISCO/luminave-thorium/issues/2
+  getClient(TYPE_THORIUM, address, parseInt(port, 10) + 1, thoriumClientId)
 
   // Create a client for luminave
-  getClient(TYPE_LUMINAVE, 'localhost', 4000 - 1, null)
+  // @TODO: host & port should be configurable, see https://github.com/NERDDISCO/luminave-thorium/issues/2
+  getClient(TYPE_LUMINAVE, 'localhost', 4000, null)
 
   // Register this app with Thorium as a client
   registerClient()
@@ -30,7 +32,7 @@ export default (address, port, thoriumClientId) => {
 
   App.on('clientChange', clientObj => {
     // Is a simulator attachted to the client?
-    if (clientObj.simulator === null) {
+    if (clientObj.simulator === null) { 
       // no lighting information anymore
       console.log('No simulator selected')
     } else {
@@ -40,8 +42,14 @@ export default (address, port, thoriumClientId) => {
   })
 
   App.on('lightingChange', lightingObj => {
-    console.log('-------------------------')
+    console.log('--------------------------')
     console.log(lightingObj.lighting)
+
+    console.log('update animation')
+    const animation = luminaveClient.transformLightingToAnimation(lightingObj.lighting)
+    luminaveClient.setAnimation(animation)
+
+    console.log('update scenes')
     const scenes = luminaveClient.transformLightingToScenes(lightingObj.lighting)
     luminaveClient.updateTimeline(scenes)
     console.log('-------------------------')

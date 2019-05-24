@@ -20,12 +20,9 @@ const clients = {
 export class GraphqlClient {
   constructor(address, port, clientId) {
     // Query / Mutation endpoint over HTTP
-    this.endpoint = `http://${address}:${parseInt(port, 10) + 1}/graphql`
-
-    console.log(this.endpoint)
-
-    // Subscription endpoint over WebSockets
-    this.subscriptionEndpoint = `ws://${address}:${parseInt(port, 10) + 2}/subscriptions`
+    // @TODO: Everything should work over WebSockets, we have to rewrite this into using Apollo-Client
+    this.endpoint = `http://${address}:${port}/graphql`
+    this.endpointSubscription = `ws://${address}:${port}/graphql`
 
     this.clientId = clientId
   }
@@ -58,7 +55,7 @@ export class GraphqlClient {
   subscribe(queryParams) {
     return query({
       ...queryParams,
-      endpoint: this.subscriptionEndpoint,
+      endpoint: this.endpointSubscription,
       headers: {
         ...queryParams.headers,
         clientId: this.clientId
@@ -83,6 +80,8 @@ export const getClient = (type, address, port, clientId) => {
   }
 
   clients[type] = new GraphqlClient(address, port, clientId)
+
+  console.log(type, clients[type].endpoint, clients[type].endpointSubscription)
 
   return clients[type]
 }
