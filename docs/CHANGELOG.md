@@ -1,3 +1,12 @@
+# [1.2.0](https://github.com/NERDDISCO/luminave-thorium/compare/v1.1.0...v1.2.0) (2019-05-27)
+
+
+### Features
+
+* **config:** Added dotenv ([1c0dfe4](https://github.com/NERDDISCO/luminave-thorium/commit/1c0dfe4)), closes [#2](https://github.com/NERDDISCO/luminave-thorium/issues/2)
+* **config:** Externalized configuration & added debugMode ([29bef08](https://github.com/NERDDISCO/luminave-thorium/commit/29bef08)), closes [#2](https://github.com/NERDDISCO/luminave-thorium/issues/2)
+* **graphql:** Set animation in luminave-server ([9b4d4a5](https://github.com/NERDDISCO/luminave-thorium/commit/9b4d4a5))
+
 # [1.1.0](https://github.com/NERDDISCO/luminave-thorium/compare/v1.0.0...v1.1.0) (2019-02-07)
 
 
