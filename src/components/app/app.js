@@ -5,17 +5,18 @@ import registerClient from '../thorium/thorium-connector'
 import ThoriumClient from '../thorium/thorium-client'
 import ThoriumLighting from '../thorium/thorium-lighting'
 import LuminaveClient from '../luminave/luminave-client'
+import config from '../../config.js'
 
-export default (address, port, thoriumClientId) => {
+export default (host, port, thoriumClientId) => {
   console.log('Starting app...')
 
+  const { hostLuminaveServer, portLuminaveServer, debugMode } = config
+
   // Create the client singleton for Thorium
-  // @TODO: host & port should be configurable, see https://github.com/NERDDISCO/luminave-thorium/issues/2
-  getClient(TYPE_THORIUM, address, parseInt(port, 10) + 1, thoriumClientId)
+  getClient(TYPE_THORIUM, host, port, thoriumClientId)
 
   // Create a client for luminave
-  // @TODO: host & port should be configurable, see https://github.com/NERDDISCO/luminave-thorium/issues/2
-  getClient(TYPE_LUMINAVE, 'localhost', 4000, null)
+  getClient(TYPE_LUMINAVE, hostLuminaveServer, portLuminaveServer, null)
 
   // Register this app with Thorium as a client
   registerClient()
@@ -42,18 +43,23 @@ export default (address, port, thoriumClientId) => {
   })
 
   App.on('lightingChange', lightingObj => {
-    console.log('--------------------------')
-    console.log(lightingObj.lighting)
 
-    console.log('update animation')
+    console.log(debugMode)
+    if (debugMode) {
+      console.log('--------------------------')
+      console.log('Lighting from Thorium', lightingObj.lighting)
+      console.log('update animation')
+    }
+    
     const animation = luminaveClient.transformLightingToAnimation(lightingObj.lighting)
     luminaveClient.setAnimation(animation)
 
-    console.log('update scenes')
+    if (debugMode) {
+      console.log('update scenes')
+    }
+
     const scenes = luminaveClient.transformLightingToScenes(lightingObj.lighting)
     luminaveClient.updateTimeline(scenes)
-    console.log('-------------------------')
-
   })
 }
 

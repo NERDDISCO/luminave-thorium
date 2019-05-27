@@ -2,6 +2,10 @@ import { getClient, getError, TYPE_THORIUM } from '../graphql/graphql-client'
 import gql from 'graphql-tag'
 import { App } from '../app/app'
 
+import config from '../../config.js'
+
+const { debugMode } = config
+
 const queryData = `
 id
 lighting {
@@ -44,7 +48,9 @@ export default class ThoriumLighting {
 
     const graphQLClient = getClient(TYPE_THORIUM)
 
-    console.log('ThoriumLighting', args.simulatorId)
+    if (debugMode) {
+      console.log('ThoriumLighting', args.simulatorId)
+    }
 
     graphQLClient
       .query({ 

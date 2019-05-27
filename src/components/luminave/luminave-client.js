@@ -2,6 +2,9 @@ import { getClient, getError, TYPE_LUMINAVE } from '../graphql/graphql-client'
 import gql from 'graphql-tag'
 import { toFixedNumber } from '../../utils/utils.js'
 import Color from 'color'
+import config from '../../config.js'
+
+const { debugMode, luminaveAnimationId } = config
 
 const QUERY = gql`
   query scenes {
@@ -72,7 +75,9 @@ export default class LuminaveClient {
 
       // Extract the scenes from the result
       .then(({ data }) => {
-        console.log('updateTimeline was successful with:', data)
+        if (debugMode) {
+          console.log('updateTimeline was successful with:', data)
+        }
       })
 
       .catch(error => console.error(getError(error)))
@@ -94,7 +99,9 @@ export default class LuminaveClient {
 
       // Extract the scenes from the result
       .then(({ data }) => {
-        console.log('setAnimation was successful with:', data)
+        if (debugMode) {
+          console.log('setAnimation was successful with:', data)
+        }
       })
 
       .catch(error => {
@@ -136,7 +143,7 @@ export default class LuminaveClient {
 
     // ID that will be used in luminave to identify the animation that will be used to 
     // dynamically update it's keyframes
-    const externalId = 'luminave-thorium-dynamic-animation-1337'
+    const externalId = luminaveAnimationId
 
     const animation = {
       dimmer: Math.round(255 * intensity),

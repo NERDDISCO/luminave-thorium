@@ -8,12 +8,19 @@ Create a connection between [luminave](https://github.com/NERDDISCO/luminave) an
 
 <!-- toc -->
 
-- [Setup](#setup)
-- [Testing](#testing)
-  * [Workflow](#workflow)
-  * [GraphQL](#graphql)
-- [API Documentation](#api-documentation)
-- [Data provided by Thorium](#data-provided-by-thorium)
+- [luminave-thorium](#luminave-thorium)
+  - [Table of Contents](#table-of-contents)
+  - [Setup](#setup)
+  - [Config](#config)
+    - [Example .env](#example-env)
+  - [Use with luminave & Thorium](#use-with-luminave--thorium)
+    - [General Workflow](#general-workflow)
+    - [GraphQL](#graphql)
+  - [Troubleshooting](#troubleshooting)
+    - [No data received from Thorium](#no-data-received-from-thorium)
+    - [One action in Thorium is triggering more than 1 changes in luminave e.g. the same scene multiple times](#one-action-in-thorium-is-triggering-more-than-1-changes-in-luminave-eg-the-same-scene-multiple-times)
+  - [API Documentation](#api-documentation)
+  - [Data provided by Thorium](#data-provided-by-thorium)
 
 <!-- tocstop -->
 
@@ -22,22 +29,34 @@ Create a connection between [luminave](https://github.com/NERDDISCO/luminave) an
 ## Setup
 
 * Clone [this repository](https://github.com/NERDDISCO/luminave-thorium)
-* Install the dev dependencies by executing `npm install` inside the repository
+* Install the dev dependencies by executing `npm install` inside the *luminave-thorium* folder
+
+---
+
+## Config
+
+If you want to change the `host` & `port` of *luminave-thorium*, you have to create a `.env` file inside the *luminave-thorium* folder. 
+
+### Example .env
+
+```
+HOST=localhost
+PORT=4000
+```
+
+---
+
+## Use with luminave & Thorium
+
+* Start with `npm start`
+* Start [Thorium server](https://github.com/Thorium-Sim/thorium) with `npm start`
+* Create a flight in Thorium at http://localhost:3000
+* Add the luminave-thorium as a client with the name `ECS` to the created flight
+
+That's it, luminave-thorium is now ready to receive data from Thorium to send it over to [luminave-server](https://github.com/NERDDISCO/luminave-server). 
 
 
-## Testing
-
-* Start the Thorium server with `npm start`
-* Start luminave-thorium with `npm start`
-* Create a flight at http://localhost:3000
-* Make sure that luminave-thorium has the word "ECS" in it's clientId (can be changed in the `index.js`)
-* Add the luminave-thorium as a client to the created flight
-* In the Thorium interface: Go to Core
-
-
-You can also open a web-client with http://localhost:3000/client
-
-### Workflow
+### General Workflow
 
 * The app tries to find the Thorium Server running in the local network
 * When it finds it it tries to setup a connection to it and registers itself as a client called "ECS"
@@ -48,6 +67,20 @@ You can also open a web-client with http://localhost:3000/client
 ### GraphQL
 
 * Use the GraphiQL on http://localhost:3001/graphiql to test your queries
+
+--- 
+
+## Troubleshooting
+
+### No data received from Thorium
+
+* Check if the client IP changed, if that happened you have to restart Thorium & luminave-thorium so it registers itself with the new IP of your computer
+
+
+### One action in Thorium is triggering more than 1 changes in luminave e.g. the same scene multiple times
+
+* Restart thorium-client and refresh Thorium in the browser
+
 
 
 ---
