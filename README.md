@@ -40,8 +40,29 @@ If you want to change the `host` & `port` of *luminave-thorium*, you have to cre
 ### Example .env
 
 ```
-HOST=localhost
-PORT=4000
+# Host of the luminave-server
+HOST_LUMINAVE_SERVER=localhost
+
+# Port of the luminave-server
+PORT_LUMINAVE_SERVER=4000
+
+# Host of Thorium
+# Leave it undefined if you want to have it auto detected with bonjour
+#HOST_THORIUM=undefined
+# Port of Thorium
+# leave it undefined if you want to have it auto detected with bonjour
+#PORT_THORIUM=undefined
+
+# ID of the Thorium client that is used by the Thorium Server to
+# identify this client as the one that can control the lighting
+# Note: As of now this will only work if the letters 'ECS' are part of the clientId
+# Note: Only change if you know what you are doing
+#THORIUM_CLIENTID='ECS'
+
+# ID that will be used in luminave to identify the animation that will be used to 
+# dynamically update it's keyframes
+# Note: Only change if you know what you are doing
+#LUMINAVE_ANIMATIONID=luminave-thorium-dynamic-animation-1337
 ```
 
 ---
