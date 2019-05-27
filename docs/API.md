@@ -53,12 +53,6 @@ Get the lighting information out of Thorium for a specific simulator
 | args | <code>Object</code> | The arguments to configure ThoriumLighting |
 | args.simulatorId | <code>String</code> | The ID of the simulator that has the lighting information |
 
-<a name="thoriumClientId"></a>
-
-## thoriumClientId
-ID of the Thorium client that is used by the Thorium Server to
-identify this client as the one that can control the lighting
-
 <a name="thoriumAvailableCards"></a>
 
 ## thoriumAvailableCards
@@ -80,12 +74,33 @@ Update the timeline with the scenes
 | --- | --- | --- |
 | scenes | <code>Array.&lt;Object&gt;</code> | The scenes to update the timeline with |
 
+<a name="setAnimation"></a>
+
+## setAnimation(animation) ⇒ <code>undefined</code>
+Update animation data
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| animation | <code>Array.&lt;Object&gt;</code> | The animation data from other applications, for example Thorium |
+
 <a name="transformLightingToScenes"></a>
 
 ## transformLightingToScenes(lighting) ⇒ <code>Array.&lt;Object&gt;</code>
 Transform the Lighting from Thorium into scenes for luminave
 
 **Returns**: <code>Array.&lt;Object&gt;</code> - A list of scenes  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| lighting | <code>Object</code> | The lighting data from Thorium |
+
+<a name="transformLightingToAnimation"></a>
+
+## transformLightingToAnimation(lighting) ⇒ <code>Object</code>
+Transform the Lighting from Thorium into animation for luminave
+
+**Returns**: <code>Object</code> - - An animation  
 
 | Param | Type | Description |
 | --- | --- | --- |
