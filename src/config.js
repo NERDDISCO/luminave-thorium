@@ -3,9 +3,6 @@ import dotenv from 'dotenv'
 // Parse the .env file
 dotenv.config()
 
-console.log(process.env.NODE_ENV)
-
-
 const config = {
   env: process.env.NODE_ENV || 'development',
 
