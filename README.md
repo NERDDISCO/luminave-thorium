@@ -72,7 +72,7 @@ PORT_LUMINAVE_SERVER=4000
 * Start with `npm start`
 * Start [Thorium server](https://github.com/Thorium-Sim/thorium) with `npm start`
 * Create a flight in Thorium at http://localhost:3000
-* Add the luminave-thorium as a client with the name `ECS` to the created flight
+* Add the luminave-thorium as a client with the name `ECS-luminave-thorium` to the created flight
 
 That's it, luminave-thorium is now ready to receive data from Thorium to send it over to [luminave-server](https://github.com/NERDDISCO/luminave-server). 
 

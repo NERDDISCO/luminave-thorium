@@ -21,11 +21,11 @@ const config = {
   // ID of the Thorium client that is used by the Thorium Server to
   // identify this client as the one that can control the lighting
   // Note: As of now this will only work if the letters 'ECS' are part of the clientId
-  thoriumClientId: process.env.THORIUM_CLIENTID || 'ECS',
+  thoriumClientId: process.env.THORIUM_CLIENTID || 'ECS-luminave-thorium',
 
   // ID that will be used in luminave to identify the animation that will be used to 
   // dynamically update it's keyframes
-  luminiaveAnimationId: process.env.LUMINAVE_ANIMATIONID || 'luminave-thorium-dynamic-animation-1337'
+  luminaveAnimationId: process.env.LUMINAVE_ANIMATIONID || 'luminave-thorium-dynamic-animation-1337'
 }
 
 
