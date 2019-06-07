@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/NERDDISCO/luminave-thorium/compare/v1.2.0...v1.2.1) (2019-06-07)
+
+
+### Bug Fixes
+
+* **config:** Changed name of client to ECS-luminave-thorium ([ab7dab0](https://github.com/NERDDISCO/luminave-thorium/commit/ab7dab0))
+
 # [1.2.0](https://github.com/NERDDISCO/luminave-thorium/compare/v1.1.0...v1.2.0) (2019-05-27)
 
 
