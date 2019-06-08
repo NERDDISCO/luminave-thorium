@@ -18,7 +18,7 @@ lighting {
 }`
 
 const QUERY = gql`
-query Lighting($id: String!) {
+query Lighting($id: ID!) {
   simulators(id: $id) {
     ${queryData}
   }
@@ -79,7 +79,6 @@ export default class ThoriumLighting {
               }
             )
           })
-          .catch(error => console.error(getError(error)))
-      })
+      }).catch(error => console.error(getError(error)))
   }
 }
