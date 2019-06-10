@@ -95,7 +95,7 @@ export const getClient = (type, address, port, clientId) => {
  */
 export const getError = error => {
   // If there is a network error we return it
-  if (error.networkError !== undefined) {
+  if (error.networkError !== undefined && error.networkError.result !== undefined) {
     return error.networkError.result.errors
   } 
 

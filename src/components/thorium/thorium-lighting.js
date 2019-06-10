@@ -81,5 +81,6 @@ export default class ThoriumLighting {
           })
           .catch(error => console.error(getError(error)))
       })
+      .catch(error => console.error(getError(error)))
   }
 }

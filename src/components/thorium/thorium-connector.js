@@ -1,4 +1,4 @@
-import { getClient, TYPE_THORIUM } from '../graphql/graphql-client'
+import { getClient, TYPE_THORIUM, getError } from '../graphql/graphql-client'
 import { thoriumAvailableCards } from '../../constants/index'
 
 /**
@@ -27,6 +27,8 @@ export default function() {
 
         return 0
       })
+
+      .catch(error => console.error(getError(error)))
   }
 
   // Process was stopped in the terminal
@@ -45,6 +47,9 @@ export default function() {
       }
     })
 
-    // Find out what gets returned here
+    // Find out what gets returned here!
     .then(() => client)
+
+    .catch(error => console.error(getError(error)))
+
 }
