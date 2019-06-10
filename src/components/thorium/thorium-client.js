@@ -53,7 +53,7 @@ export default class ThoriumClient {
 
       .then(({ data: { clients: [clientObj] } }) => {
         this.flight = clientObj.flight
-        this.simulator = clientObj.simulator
+        this.simulator = clientObj.simulator 
         this.station = clientObj.station
 
         App.emit('clientChange', this)
@@ -77,7 +77,7 @@ export default class ThoriumClient {
               },
               error => {
                 console.log('Error: ', error)
-                // handle error
+                // handle error test
               }
             )
           })

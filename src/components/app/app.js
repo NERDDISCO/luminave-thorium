@@ -44,7 +44,6 @@ export default (host, port, thoriumClientId) => {
 
   App.on('lightingChange', lightingObj => {
 
-    console.log(debugMode)
     if (debugMode) {
       console.log('--------------------------')
       console.log('Lighting from Thorium', lightingObj.lighting)
