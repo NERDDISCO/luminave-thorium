@@ -43,7 +43,7 @@ export default function getThoriumAddress() {
       }
     }
 
-    // Find the Thorium Server via HTTP
-    bonjour.find({ type: 'thorium-http' }, newService)
+    // Find the first Thorium Server in the network and then stop searching
+    bonjour.findOne({ type: 'thorium-http' }, newService)
   })
 }
