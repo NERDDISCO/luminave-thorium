@@ -120,12 +120,12 @@ export default class LuminaveClient {
   transformLightingToScenes(lighting) {
     let { color } = lighting
     const scenes = []
-
+    let colorName = `color-normal`;
     // Color
-    if (color === '#08f') {
-      color = 'normal'
+    if (color === "red" || color === "blue") {
+      colorName=`color-${color}`;
     }
-    scenes.push(this.createScene(`color-${color}`))
+    scenes.push(this.createScene(colorName))
 
     return scenes
   }

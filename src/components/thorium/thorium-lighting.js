@@ -18,7 +18,7 @@ lighting {
 }`
 
 const QUERY = gql`
-query Lighting($id: String!) {
+query Lighting($id: ID!) {
   simulators(id: $id) {
     ${queryData}
   }
