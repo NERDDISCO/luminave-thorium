@@ -6,6 +6,9 @@ import config from '../../config.js'
 
 const { debugMode } = config
 
+// The data we received from Thorium via the Subscription
+const dataSubscription = {}
+
 const queryData = `
 id
 lighting {
@@ -59,7 +62,9 @@ export default class ThoriumLighting {
       })
       .then(({ data: { simulators: [simulatorObj] } }) => {
 
-        App.emit('lightingChange', simulatorObj)
+        if (this.dataChanged(this.dataSubscription, simulatorObj.lighting)) {
+          App.emit('lightingChange', simulatorObj)
+        }
 
         // Set up the subscription
         graphQLClient
@@ -71,7 +76,9 @@ export default class ThoriumLighting {
             observable.subscribe(
               // eslint-disable-next-line no-shadow
               ({ data: { simulatorsUpdate: [simulatorObj] } }) => {
-                App.emit('lightingChange', simulatorObj)
+                if (this.dataChanged(this.dataSubscription, simulatorObj.lighting)) {
+                  App.emit('lightingChange', simulatorObj.lighting)
+                }
               },
               error => {
                 console.log('Error: ', error)
@@ -82,5 +89,17 @@ export default class ThoriumLighting {
           .catch(error => console.error(getError(error)))
       })
       .catch(error => console.error(getError(error)))
+  }
+
+  /**
+   * Check the data that is coming from Thorium to see if it changed
+   * 
+   * @param {Object} oldValue The old data
+   * @param {Object} newValue The new data
+   */
+  dataChanged(oldValue, newValue) {
+    this.dataSubscription = newValue
+    
+    return JSON.stringify(oldValue) !== JSON.stringify(newValue)
   }
 }

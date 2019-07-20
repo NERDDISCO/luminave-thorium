@@ -42,22 +42,22 @@ export default (host, port, thoriumClientId) => {
     }
   })
 
-  App.on('lightingChange', lightingObj => {
+  App.on('lightingChange', lighting => {
 
     if (debugMode) {
       console.log('--------------------------')
-      console.log('Lighting from Thorium', lightingObj.lighting)
+      console.log('Lighting from Thorium', lighting)
       console.log('update animation')
     }
     
-    const animation = luminaveClient.transformLightingToAnimation(lightingObj.lighting)
+    const animation = luminaveClient.transformLightingToAnimation(lighting)
     luminaveClient.setAnimation(animation)
 
     if (debugMode) {
       console.log('update scenes')
     }
 
-    const scenes = luminaveClient.transformLightingToScenes(lightingObj.lighting)
+    const scenes = luminaveClient.transformLightingToScenes(lighting)
     luminaveClient.updateTimeline(scenes)
   })
 }
