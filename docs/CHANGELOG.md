@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/NERDDISCO/luminave-thorium/compare/v1.2.4...v1.2.5) (2019-07-20)
+
+
+### Bug Fixes
+
+* **subscription:** Only use changed data for luminave ([a528ee6](https://github.com/NERDDISCO/luminave-thorium/commit/a528ee6)), closes [#5](https://github.com/NERDDISCO/luminave-thorium/issues/5)
+
 ## [1.2.4](https://github.com/NERDDISCO/luminave-thorium/compare/v1.2.3...v1.2.4) (2019-07-18)
 
 
