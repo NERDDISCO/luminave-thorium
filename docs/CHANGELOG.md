@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/NERDDISCO/luminave-thorium/compare/v1.2.3...v1.2.4) (2019-07-18)
+
+
+### Bug Fixes
+
+* **bonjour:** Find just one thorium server ([54e14df](https://github.com/NERDDISCO/luminave-thorium/commit/54e14df)), closes [#6](https://github.com/NERDDISCO/luminave-thorium/issues/6)
+
 ## [1.2.3](https://github.com/NERDDISCO/luminave-thorium/compare/v1.2.2...v1.2.3) (2019-06-10)
 
 
