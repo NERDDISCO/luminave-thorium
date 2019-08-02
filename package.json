@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "webpack --config webpack.node.config.js",
+    "bundle": "webpack --config webpack.node-bundle.config.js",
     "start": "npm-run-all --parallel watch:server watch:build",
     "watch:build": "webpack --config webpack.node.config.js --watch",
     "watch:server": "nodemon \"./build/bundle.js\" --watch \"./build\" ",
