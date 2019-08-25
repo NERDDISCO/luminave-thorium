@@ -63,7 +63,7 @@ export default class ThoriumLighting {
       .then(({ data: { simulators: [simulatorObj] } }) => {
 
         if (this.dataChanged(this.dataSubscription, simulatorObj.lighting)) {
-          App.emit('lightingChange', simulatorObj)
+          App.emit('lightingChange', simulatorObj.lighting)
         }
 
         // Set up the subscription
