@@ -1,3 +1,10 @@
+## [1.2.6](https://github.com/NERDDISCO/luminave-thorium/compare/v1.2.5...v1.2.6) (2019-08-25)
+
+
+### Bug Fixes
+
+* **graphql:** Use correct data for initial query to Thorium ([e922214](https://github.com/NERDDISCO/luminave-thorium/commit/e922214))
+
 ## [1.2.5](https://github.com/NERDDISCO/luminave-thorium/compare/v1.2.4...v1.2.5) (2019-07-20)
 
 
