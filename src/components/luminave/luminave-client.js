@@ -122,7 +122,7 @@ export default class LuminaveClient {
     const scenes = []
     let colorName = `color-normal`;
     // Color
-    if (color === "red" || color === "blue") {
+    if (color === "red" || color === "blue" || color === "black") {
       colorName=`color-${color}`;
     }
     scenes.push(this.createScene(colorName))
