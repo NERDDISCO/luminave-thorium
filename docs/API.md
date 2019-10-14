@@ -42,6 +42,12 @@ Based on the error gives back only network errors
 | --- | --- | --- |
 | error | <code>\*</code> | The GraphQL error |
 
+
+* [ThoriumLighting](#module_ThoriumLighting)
+    * [.subsciption()](#module_ThoriumLighting+subsciption)
+    * [.dataChanged(oldValue, newValue)](#module_ThoriumLighting+dataChanged)
+    * [.disconnectedCallback()](#module_ThoriumLighting+disconnectedCallback)
+
 <a name="module_ThoriumLighting"></a>
 
 ## ThoriumLighting
@@ -53,6 +59,11 @@ Get the lighting information out of Thorium for a specific simulator
 | args | <code>Object</code> | The arguments to configure ThoriumLighting |
 | args.simulatorId | <code>String</code> | The ID of the simulator that has the lighting information |
 
+<a name="module_ThoriumLighting+subsciption"></a>
+
+### thoriumLighting.subsciption()
+Subscribe to lighting changes
+
 <a name="module_ThoriumLighting+dataChanged"></a>
 
 ### thoriumLighting.dataChanged(oldValue, newValue)
@@ -63,6 +74,11 @@ Check the data that is coming from Thorium to see if it changed
 | --- | --- | --- |
 | oldValue | <code>Object</code> | The old data |
 | newValue | <code>Object</code> | The new data |
+
+<a name="module_ThoriumLighting+disconnectedCallback"></a>
+
+### thoriumLighting.disconnectedCallback()
+Clean up when the component gets destroyed
 
 <a name="thoriumAvailableCards"></a>
 

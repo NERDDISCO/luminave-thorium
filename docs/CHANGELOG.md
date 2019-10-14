@@ -1,3 +1,10 @@
+## [1.2.7](https://github.com/NERDDISCO/luminave-thorium/compare/v1.2.6...v1.2.7) (2019-10-14)
+
+
+### Bug Fixes
+
+* **thorium-lighting:** Unsubscribe from simulatorUpdate subscription ([5133898](https://github.com/NERDDISCO/luminave-thorium/commit/5133898)), closes [#10](https://github.com/NERDDISCO/luminave-thorium/issues/10)
+
 ## [1.2.6](https://github.com/NERDDISCO/luminave-thorium/compare/v1.2.5...v1.2.6) (2019-08-25)
 
 
