@@ -26,6 +26,7 @@ export default (host, port, thoriumClientId) => {
   // Grab the client object to instantiate it
   // eslint-disable-next-line no-unused-vars
   const thoriumClient = new ThoriumClient({ thoriumClientId })
+  let thoriumLighting = undefined
 
   // Grab the client object to instantiate it
   // eslint-disable-next-line no-unused-vars
@@ -37,8 +38,14 @@ export default (host, port, thoriumClientId) => {
       // no lighting information anymore
       console.log('No simulator selected')
     } else {
+      // Lighting was already created, so we gracefully shut it down
+      if (thoriumLighting !== undefined) {
+        thoriumLighting.disconnectedCallback()
+        thoriumLighting = undefined
+      }
+
       // eslint-disable-next-line no-unused-vars
-      const thoriumLighting = new ThoriumLighting({ simulatorId: clientObj.simulator.id })
+      thoriumLighting = new ThoriumLighting({ simulatorId: clientObj.simulator.id })
     }
   })
 

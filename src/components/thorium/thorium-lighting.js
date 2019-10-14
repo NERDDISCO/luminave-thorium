@@ -48,14 +48,15 @@ export default class ThoriumLighting {
   constructor(args) {
 
     this.simulatorId = args.simulatorId
-
-    const graphQLClient = getClient(TYPE_THORIUM)
+    this.observable = undefined
+    this.graphQLClient = getClient(TYPE_THORIUM)
 
     if (debugMode) {
-      console.log('ThoriumLighting', args.simulatorId)
+      console.log('ThoriumLighting for simulatorId', args.simulatorId)
     }
 
-    graphQLClient
+    // Get initial data
+    this.graphQLClient
       .query({ 
         query: QUERY, 
         variables: { id: this.simulatorId } 
@@ -66,27 +67,37 @@ export default class ThoriumLighting {
           App.emit('lightingChange', simulatorObj.lighting)
         }
 
-        // Set up the subscription
-        graphQLClient
-          .subscribe({
-            query: SUBSCRIPTION,
-            variables: { id: this.simulatorId }
-          })
-          .then(observable => {
-            observable.subscribe(
-              // eslint-disable-next-line no-shadow
-              ({ data: { simulatorsUpdate: [simulatorObj] } }) => {
-                if (this.dataChanged(this.dataSubscription, simulatorObj.lighting)) {
-                  App.emit('lightingChange', simulatorObj.lighting)
-                }
-              },
-              error => {
-                console.log('Error: ', error)
-                // handle error
-              }
-            )
-          })
-          .catch(error => console.error(getError(error)))
+        // Get more data when it changes
+        this.subsciption()
+      })
+      .catch(error => console.error(getError(error)))
+
+  }
+
+  /**
+   * Subscribe to lighting changes 
+   */
+  subsciption() {
+    this.graphQLClient
+      .subscribe({
+        query: SUBSCRIPTION,
+        variables: { id: this.simulatorId }
+      })
+      .then(observable => {
+
+        this.observable = observable.subscribe(
+          // eslint-disable-next-line no-shadow
+          ({ data: { simulatorsUpdate: [simulatorObj] } }) => {
+
+            if (this.dataChanged(this.dataSubscription, simulatorObj.lighting)) {
+              App.emit('lightingChange', simulatorObj.lighting)
+            }
+          },
+          error => {
+            console.log('Error: ', error)
+          }
+        )
+        
       })
       .catch(error => console.error(getError(error)))
   }
@@ -99,7 +110,24 @@ export default class ThoriumLighting {
    */
   dataChanged(oldValue, newValue) {
     this.dataSubscription = newValue
+
+    if (debugMode && JSON.stringify(oldValue) !== JSON.stringify(newValue)) {
+      console.log('---------------------data Changed-----------------------')
+      console.log(JSON.stringify(oldValue))
+      console.log(JSON.stringify(newValue))
+      console.log('--------------------------------------------------------')
+    }
     
     return JSON.stringify(oldValue) !== JSON.stringify(newValue)
+  }
+
+  /**
+   * Clean up when the component gets destroyed
+   */
+  disconnectedCallback() {
+    // Unsubscribe from subscription
+    if (this.observable !== undefined) {
+      this.observable.unsubscribe()
+    }
   }
 }
