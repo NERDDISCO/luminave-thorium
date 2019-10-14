@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/NERDDISCO/luminave-thorium/compare/v1.2.7...v1.3.0) (2019-10-14)
+
+
+### Features
+
+* **luminave-client:** Allow black as scene ([fff7e77](https://github.com/NERDDISCO/luminave-thorium/commit/fff7e77)), closes [#13](https://github.com/NERDDISCO/luminave-thorium/issues/13)
+
 ## [1.2.7](https://github.com/NERDDISCO/luminave-thorium/compare/v1.2.6...v1.2.7) (2019-10-14)
 
 
