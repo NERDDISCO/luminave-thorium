@@ -109,7 +109,17 @@ export default class ThoriumLighting {
    * @param {Object} newValue The new data
    */
   dataChanged(oldValue, newValue) {
-    this.dataSubscription = newValue
+    // Remove data that we don't need and is causing problems
+    delete newValue.__typename
+
+    // If there is no new data, the data is not changed for sure
+    if (newValue === undefined) {
+      return false
+
+    // There is new data
+    } else {
+      this.dataSubscription = newValue
+    }
 
     if (debugMode && JSON.stringify(oldValue) !== JSON.stringify(newValue)) {
       console.log('---------------------data Changed-----------------------')
