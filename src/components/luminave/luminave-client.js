@@ -118,14 +118,50 @@ export default class LuminaveClient {
    * @returns {Object[]} A list of scenes
    */
   transformLightingToScenes(lighting) {
-    let { color } = lighting
+    let { color, useAlertColor } = lighting
     const scenes = []
-    let colorName = `color-normal`;
-    // Color
-    if (color === "red" || color === "blue" || color === "black") {
-      colorName=`color-${color}`;
+    let colorName = `color-normal`
+    let alertName = `alert-`
+
+    // Alert 1 to 5 & p
+    if (useAlertColor) {
+      switch (color) {
+        case '#08f':
+          alertName += 5
+          break
+        case '#0f0':
+          alertName += 4
+          break
+        case '#ff0':
+          alertName += 3
+          break
+        case '#f80':
+          alertName += 2
+          break
+        case '#f00':
+          alertName += 1
+          break
+        case 'rebeccapurple':
+          alertName += 'p'
+          break
+      
+        default:
+          alertName = undefined
+          break
+      }
+
+      if (alertName !== undefined) {
+        scenes.push(this.createScene(alertName))
+      }
+    } else {
+      // Color
+      if (color === "red" || color === "blue" || color === "black") {
+        colorName = `color-${color}`;
+      }
+      scenes.push(this.createScene(colorName))
     }
-    scenes.push(this.createScene(colorName))
+
+    
 
     return scenes
   }
