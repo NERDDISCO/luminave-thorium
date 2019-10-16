@@ -26,7 +26,15 @@ export default (host, port, thoriumClientId) => {
   // Grab the client object to instantiate it
   // eslint-disable-next-line no-unused-vars
   const thoriumClient = new ThoriumClient({ thoriumClientId })
+
+  // Handle the lighting from Thorium
   let thoriumLighting = undefined
+
+  // The active simulatorId
+  let activeSimulatorId = undefined
+
+  // The active scenes in luminave
+  let activeLuminaveScenes = []
 
   // Grab the client object to instantiate it
   // eslint-disable-next-line no-unused-vars
@@ -38,14 +46,21 @@ export default (host, port, thoriumClientId) => {
       // no lighting information anymore
       console.log('No simulator selected')
     } else {
-      // Lighting was already created, so we gracefully shut it down
-      if (thoriumLighting !== undefined) {
-        thoriumLighting.disconnectedCallback()
-        thoriumLighting = undefined
+
+      // Only create a new thorium-lighting if the simulator changed
+      if (activeSimulatorId !== clientObj.simulator.id) {
+        activeSimulatorId = clientObj.simulator.id
+
+        // Lighting was already created, so we gracefully shut it down
+        if (thoriumLighting !== undefined) {
+          thoriumLighting.disconnectedCallback()
+          thoriumLighting = undefined
+        }
+
+        // eslint-disable-next-line no-unused-vars
+        thoriumLighting = new ThoriumLighting({ simulatorId: clientObj.simulator.id })
       }
 
-      // eslint-disable-next-line no-unused-vars
-      thoriumLighting = new ThoriumLighting({ simulatorId: clientObj.simulator.id })
     }
   })
 
@@ -59,13 +74,24 @@ export default (host, port, thoriumClientId) => {
     
     const animation = luminaveClient.transformLightingToAnimation(lighting)
     luminaveClient.setAnimation(animation)
+    
+    // Extracted scenes from Thorium
+    let scenes = luminaveClient.transformLightingToScenes(lighting)
 
-    if (debugMode) {
-      console.log('update scenes')
+    // Remove all scenes that already are active in luminave
+    for (let i = 0; i < activeLuminaveScenes.length; i++) {
+      scenes = scenes.filter(element => element.name !== activeLuminaveScenes[i].name)
     }
 
-    const scenes = luminaveClient.transformLightingToScenes(lighting)
-    luminaveClient.updateTimeline(scenes)
+    // Only update the scenes if they changed from the last time
+    if (scenes.length > 0) {
+      if (debugMode) {
+        console.log('update scenes')
+      }
+
+      activeLuminaveScenes = scenes
+      luminaveClient.updateTimeline(scenes)
+    }
   })
 }
 
