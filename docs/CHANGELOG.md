@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/NERDDISCO/luminave-thorium/compare/v1.3.0...v1.4.0) (2019-10-16)
+
+
+### Bug Fixes
+
+* **thorium-lighting:** Only update scene when there was a change ([c66ad6e](https://github.com/NERDDISCO/luminave-thorium/commit/c66ad6e)), closes [#10](https://github.com/NERDDISCO/luminave-thorium/issues/10)
+
+
+### Features
+
+* **thorium-lighting:** Map alert levels to scenes ([e5311d1](https://github.com/NERDDISCO/luminave-thorium/commit/e5311d1)), closes [#9](https://github.com/NERDDISCO/luminave-thorium/issues/9)
+
 # [1.3.0](https://github.com/NERDDISCO/luminave-thorium/compare/v1.2.7...v1.3.0) (2019-10-14)
 
 
