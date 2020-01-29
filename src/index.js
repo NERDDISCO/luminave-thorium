@@ -2,7 +2,7 @@ import getThoriumAddress from './components/bonjour/bonjour'
 import startApp from './components/app/app'
 import config from './config.js'
 
-const { hostThorium, portThorium, thoriumClientId } = config
+const { protocolThorium, hostThorium, portThorium, thoriumClientId } = config
 
 // Use bonjour to find Thorium
 if (hostThorium === undefined && portThorium === undefined) {
@@ -14,7 +14,7 @@ if (hostThorium === undefined && portThorium === undefined) {
       port = parseInt(port, 10) + 1
 
       console.log(`Found Thorium server: ${address}:${port}`)
-      startApp(address, port, thoriumClientId)
+      startApp(protocolThorium, address, port, thoriumClientId)
     })
     .catch(err => {
       console.error('An error occured')
@@ -24,5 +24,5 @@ if (hostThorium === undefined && portThorium === undefined) {
 // Use the configured host & port for Thorium
 } else {
   console.log(`Thorium server configured on: ${hostThorium}:${portThorium}`)
-  startApp(hostThorium, portThorium, thoriumClientId)
+  startApp(protocolThorium, hostThorium, portThorium, thoriumClientId)
 }

@@ -8,17 +8,19 @@ Create a connection between [luminave](https://github.com/NERDDISCO/luminave) an
 
 <!-- toc -->
 
-- [Setup](#setup)
-- [Config](#config)
-  * [Example .env](#example-env)
-- [Use with luminave & Thorium](#use-with-luminave--thorium)
-  * [General Workflow](#general-workflow)
-  * [GraphQL](#graphql)
-- [Troubleshooting](#troubleshooting)
-  * [No data received from Thorium](#no-data-received-from-thorium)
-  * [One action in Thorium is triggering more than 1 changes in luminave e.g. the same scene multiple times](#one-action-in-thorium-is-triggering-more-than-1-changes-in-luminave-eg-the-same-scene-multiple-times)
-- [API Documentation](#api-documentation)
-- [Data provided by Thorium](#data-provided-by-thorium)
+- [luminave-thorium](#luminave-thorium)
+  - [Table of Contents](#table-of-contents)
+  - [Setup](#setup)
+  - [Config](#config)
+    - [Example .env](#example-env)
+  - [Use with luminave & Thorium](#use-with-luminave--thorium)
+    - [General Workflow](#general-workflow)
+    - [GraphQL](#graphql)
+  - [Troubleshooting](#troubleshooting)
+    - [No data received from Thorium](#no-data-received-from-thorium)
+    - [One action in Thorium is triggering more than 1 changes in luminave e.g. the same scene multiple times](#one-action-in-thorium-is-triggering-more-than-1-changes-in-luminave-eg-the-same-scene-multiple-times)
+  - [API Documentation](#api-documentation)
+  - [Data provided by Thorium](#data-provided-by-thorium)
 
 <!-- tocstop -->
 
@@ -33,17 +35,22 @@ Create a connection between [luminave](https://github.com/NERDDISCO/luminave) an
 
 ## Config
 
-If you want to change the `host` & `port` of *luminave-thorium*, you have to create a `.env` file inside the *luminave-thorium* folder. 
+If you want to change the `protocol`, `host` & `port` of *luminave-server* or *thorium*, you have to create a `.env` file inside the *luminave-thorium* folder. 
 
 ### Example .env
 
 ```bash
+# Protocol of the luminave-server, default is HTTP
+#PROTOCOL_LUMINAVE_SERVER=localhost
+
 # Host of the luminave-server
 HOST_LUMINAVE_SERVER=localhost
 
 # Port of the luminave-server
 PORT_LUMINAVE_SERVER=4000
 
+# Protocol of Thorium, default is HTTP
+#PROTOCOL_THORIUM=https
 # Host of Thorium
 # Leave it undefined if you want to have it auto detected with bonjour
 #HOST_THORIUM=undefined

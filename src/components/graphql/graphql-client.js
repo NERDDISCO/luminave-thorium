@@ -13,15 +13,16 @@ const clients = {
  * 
  * @module GraphqlClient
  * 
+ * @param {string} protocol - The protocol of the GraphQL server
  * @param {string} address - The IP of the Thorium server
  * @param {string} port - The port of the Thorium server
  * @param {string} clientId - The ID of the client that will be used in Thorium to identify this client
  */
 export class GraphqlClient {
-  constructor(address, port, clientId) {
+  constructor(protocol, address, port, clientId) {
     // Query / Mutation endpoint over HTTP
     // @TODO: Everything should work over WebSockets, we have to rewrite this into using Apollo-Client
-    this.endpoint = `http://${address}:${port}/graphql`
+    this.endpoint = `${protocol}://${address}:${port}/graphql`
     this.endpointSubscription = `ws://${address}:${port}/graphql`
 
     this.clientId = clientId
@@ -68,18 +69,19 @@ export class GraphqlClient {
  * Singleton client
  * 
  * @param {string} type - What kind of GraphQL client (either thorium or luminave)
+ * @param {string} protocol - The protocol of the graphql client
  * @param {string} address - The IP of the Thorium server
  * @param {string} port - The port of the Thorium server
  * @param {string} clientId - The ID of the client that will be used in Thorium to identify this client
  * 
  * @return {Object} client - The instance of the GraphqlClient
  */
-export const getClient = (type, address, port, clientId) => {
+export const getClient = (type, protocol, address, port, clientId) => {
   if (clients[type]) {
     return clients[type]
   }
 
-  clients[type] = new GraphqlClient(address, port, clientId)
+  clients[type] = new GraphqlClient(protocol, address, port, clientId)
 
   console.log(type, clients[type].endpoint, clients[type].endpointSubscription)
 
