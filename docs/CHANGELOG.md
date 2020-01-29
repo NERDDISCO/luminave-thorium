@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/NERDDISCO/luminave-thorium/compare/v1.4.0...v1.5.0) (2020-01-29)
+
+
+### Features
+
+* **config:** Change the protocol ([28fce05](https://github.com/NERDDISCO/luminave-thorium/commit/28fce05))
+
 # [1.4.0](https://github.com/NERDDISCO/luminave-thorium/compare/v1.3.0...v1.4.0) (2019-10-16)
 
 

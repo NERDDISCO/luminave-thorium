@@ -13,6 +13,7 @@ The client can be used to interact with the GraphQL API of Thorium.
 
 | Param | Type | Description |
 | --- | --- | --- |
+| protocol | <code>string</code> | The protocol of the GraphQL server |
 | address | <code>string</code> | The IP of the Thorium server |
 | port | <code>string</code> | The port of the Thorium server |
 | clientId | <code>string</code> | The ID of the client that will be used in Thorium to identify this client |
@@ -27,6 +28,7 @@ Singleton client
 | Param | Type | Description |
 | --- | --- | --- |
 | type | <code>string</code> | What kind of GraphQL client (either thorium or luminave) |
+| protocol | <code>string</code> | The protocol of the graphql client |
 | address | <code>string</code> | The IP of the Thorium server |
 | port | <code>string</code> | The port of the Thorium server |
 | clientId | <code>string</code> | The ID of the client that will be used in Thorium to identify this client |
