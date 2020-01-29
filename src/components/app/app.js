@@ -7,16 +7,16 @@ import ThoriumLighting from '../thorium/thorium-lighting'
 import LuminaveClient from '../luminave/luminave-client'
 import config from '../../config.js'
 
-export default (host, port, thoriumClientId) => {
+export default (protocol, host, port, thoriumClientId) => {
   console.log('Starting app...')
 
-  const { hostLuminaveServer, portLuminaveServer, debugMode } = config
+  const { protocolLuminaveServer, hostLuminaveServer, portLuminaveServer, debugMode } = config
 
   // Create the client singleton for Thorium
-  getClient(TYPE_THORIUM, host, port, thoriumClientId)
+  getClient(TYPE_THORIUM, protocol, host, port, thoriumClientId)
 
   // Create a client for luminave
-  getClient(TYPE_LUMINAVE, hostLuminaveServer, portLuminaveServer, null)
+  getClient(TYPE_LUMINAVE, protocolLuminaveServer, hostLuminaveServer, portLuminaveServer, null)
 
   // Register this app with Thorium as a client
   registerClient()

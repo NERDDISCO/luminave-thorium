@@ -6,11 +6,15 @@ dotenv.config()
 const config = {
   env: process.env.NODE_ENV || 'development',
 
+  // protocol of the luminave-server
+  protocolLuminaveServer: process.env.PROTOCOL_LUMINAVE_SERVER || 'http',
   // Host of the luminave-server
   hostLuminaveServer: process.env.HOST_LUMINAVE_SERVER || 'localhost',
   // Port of the luminave-server
   portLuminaveServer: parseInt(process.env.PORT_LUMINAVE_SERVER) || 4000,
 
+  // Protocol of Thorium
+  protocolThorium: process.env.PROTOCOL_THORIUM || 'http',
   // Host of Thorium
   // Leave it undefined if you want to have it auto detected with bonjour
   hostThorium: process.env.HOST_THORIUM || undefined,
