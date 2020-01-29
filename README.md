@@ -41,7 +41,7 @@ If you want to change the `protocol`, `host` & `port` of *luminave-server* or *t
 
 ```bash
 # Protocol of the luminave-server, default is HTTP
-#PROTOCOL_LUMINAVE_SERVER=localhost
+#PROTOCOL_LUMINAVE_SERVER=http
 
 # Host of the luminave-server
 HOST_LUMINAVE_SERVER=localhost
